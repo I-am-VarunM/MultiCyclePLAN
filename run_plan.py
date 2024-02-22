@@ -63,10 +63,17 @@ def createClkList(clkList, sname, tv):
         if x[0] not in clkList: # if clock is not there in the dict
             clkList[x[0]]=[[],[]]
             clkList[x[0]][0].append(sname)
-            clkList[x[0]][1].append(x[1])
+            if x[1] == 'x':
+                clkList[x[0]][1].append('0')
+            else:
+                clkList[x[0]][1].append(x[1])
         else:
             clkList[x[0]][0].append(sname)
-            clkList[x[0]][1].append(x[1])
+            if x[1] == 'x':
+                clkList[x[0]][1].append('0')
+            else:
+                clkList[x[0]][1].append(x[1])
+    #print(clkList)
     return clkList
 
 
@@ -83,11 +90,13 @@ def readVCD(num_iterations, numofclk): #Can be parallelized but Memory can get f
             #print(signame)
             sigdic = data[x]['tv']
             #print(signame)
+            #print("sigdic")
             #print(sigdic)
             if len(sigdic) < numofclk:
                     last_value = sigdic[-1]
                     sigdic.extend([last_value] * (numofclk - len(sigdic)))
             #print(type(sigdic))
+            #print(sigdic)
             updated_list = []
             c =1
             for item in sigdic:
@@ -215,8 +224,8 @@ def HammingDistanceSignalWise(sig):
     return tempfile
 
 def processSignals(sigs):
-    print("Printing all the sigs")
-    print(sigs)
+    #print("Printing all the sigs")
+    #print(sigs)
     for sig in tqdm(sigs, "Processing signals"):
         try:
             #print("hamming distance")
