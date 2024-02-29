@@ -55,7 +55,7 @@ sigMatrix = {}
 cipher = {}
 O = {}
 togglingSigs = set()
-numofclk = 3
+numofclk = 5
 # Can be parralelised and this is taking care of time stamp values I think x[0] gives time stamp and
 def createClkList(clkList, sname, tv):
     for x in tv:
@@ -190,7 +190,8 @@ def updateSigArray(k1, k2, v): #fname = k1, k2 = tempsigs, v = tempvalues
     x = k2[k1]
     y = v[k1]
     filename = k1.split('_')[0]
-    clkiter = 'c' + k1.split('_')[1][numofclk:]
+    print(k1.split('_')[1])
+    clkiter = 'c' + k1.split('_')[1][3:]
     #print(filename)
     #print(clkiter)
     for k, v in zip(x, y):
